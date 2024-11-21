@@ -12,7 +12,6 @@ namespace ProConsulta.Repositories.Especialidades
         {
             _context = context;
         }
-
         public async Task<List<Especialidade>> GetAllAsync()
         {
             return await _context.Especialidades
@@ -20,6 +19,5 @@ namespace ProConsulta.Repositories.Especialidades
                 .AsNoTracking()
                 .ToListAsync();
         }
-
     }
 }

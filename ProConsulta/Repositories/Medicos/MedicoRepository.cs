@@ -17,14 +17,12 @@ namespace ProConsulta.Repositories.Medicos
             _context.Medicos.Add(medico);
             await _context.SaveChangesAsync();
         }
-
         public async Task DeleteByIdAsync(int id)
         {
             var medico = await GetByIdAsync(id);
             _context.Medicos.Remove(medico);
             await _context.SaveChangesAsync();
         }
-
         public async Task<List<Medico>> GetAllAsync()
         {
             return await _context.Medicos
@@ -32,7 +30,6 @@ namespace ProConsulta.Repositories.Medicos
                 .AsNoTracking()
                 .ToListAsync();
         }
-
         public async Task<Medico?> GetByIdAsync(int id)
         {
             return await _context
@@ -43,6 +40,5 @@ namespace ProConsulta.Repositories.Medicos
             _context.Update(medico);
             await _context.SaveChangesAsync();
         }
-
     }
 }

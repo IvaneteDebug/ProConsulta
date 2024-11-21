@@ -20,7 +20,6 @@ namespace ProConsulta.Data.Configurations
                IsRequired();
 
             builder.Property(x => x.MedicoId).IsRequired();
-
         }
     }
 }
