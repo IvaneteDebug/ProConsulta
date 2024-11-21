@@ -1,4 +1,4 @@
-# Blazor ProConsulta
+# ProConsulta
 
 Este projeto é uma aplicação web desenvolvida com **Blazor** para **gerenciar agendamentos**, **atendimentos** e **consultas de dados**. A aplicação utiliza **Entity Framework Core** para conexão com o banco de dados, e inclui modelos, configurações de banco de dados e repositórios.
 
