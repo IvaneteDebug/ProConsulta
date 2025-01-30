@@ -20,7 +20,7 @@ Este projeto é uma aplicação web desenvolvida com **Blazor** para **gerenciar
 ## Como Executar
 
 1- Faça um fork do projeto.
-2- Crie uma branch para sua feature: git checkout -b feature/minha-feature.
+2- Crie uma branch para sua feature: git checkout -b feature/minha-feature
 3- Faça as alterações desejadas.
-4- Commit e push: git commit -am 'Adicionando nova feature' && git push origin feature/minha-feature.
+4- Commit e push: git commit -am 'Adicionando nova feature' && git push origin feature/minha-feature
 5- Abra um Pull Request para a branch main.
