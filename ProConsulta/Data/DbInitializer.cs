@@ -58,11 +58,16 @@ namespace ProConsulta.Data
 
             _modelBuilder.Entity<Especialidade>().HasData
              (
-                new Especialidade { Id = 1, Descricao = "Especialista médica que trata doenças do coração e do sistema vascular", Nome = "Neurologista" },
-                new Especialidade { Id = 2, Descricao = "Especialista médica que trata doenças relacionadas ao cérebro e ao sistema nervoso", Nome = "Neurologista" },
-                new Especialidade { Id = 3, Descricao = "Especialista médica que trata problemas de pele, cabelos e unhas", Nome = "Dermatologista" },
-                new Especialidade { Id = 4, Descricao = "Especialista médica que diagnostica e trata problemas hormonais e do sistema endócrino", Nome = "Endocrinologista" },
-                new Especialidade { Id = 5, Descricao = "Especialista médica que trata doenças relacionadas aos rins e ao sistema urinário", Nome = "Nefrologista" }
+                new Especialidade { Id = 1, Nome = "Cardiologia", Descricao = "Especialidade médica que cuida do coração" },
+                new Especialidade { Id = 2, Nome = "Dermatologia", Descricao = "Especialidade que trata de doenças e condições da pele." },
+                new Especialidade { Id = 3, Nome = "Ortopedia", Descricao = "Especialidade focada no tratamento de ossos, músculos ." },
+                new Especialidade { Id = 4, Nome = "Pediatria", Descricao = "Área médica voltada ao cuidado da saúde infantil." },
+                new Especialidade { Id = 5, Nome = "Ginecologia", Descricao = "Especialidade que trata da saúde do sistema reprodutor feminino." },
+                new Especialidade { Id = 6, Nome = "Neurologia", Descricao = "Área da medicina que trata do sistema nervoso." },
+                new Especialidade { Id = 7, Nome = "Psiquiatria", Descricao = "Especialidade que cuida da saúde mental e transtornos psicológicos." },
+                new Especialidade { Id = 8, Nome = "Oftalmologia", Descricao = "Especialidade dedicada ao cuidado da visão e dos olhos." },
+                new Especialidade { Id = 9, Nome = "Endocrinologia", Descricao = "Especialidade que trata das glândulas e hormônios do corpo." },
+                new Especialidade { Id = 10, Nome = "Gastroenterologia", Descricao = "Área médica que cuida do sistema digestivo." }
              );
         }
     }

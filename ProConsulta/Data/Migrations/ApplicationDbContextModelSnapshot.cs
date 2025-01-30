@@ -17,7 +17,7 @@ namespace ProConsulta.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -307,32 +307,62 @@ namespace ProConsulta.Migrations
                         new
                         {
                             Id = 1,
-                            Descricao = "Especialista médica que trata doenças do coração e do sistema vascular",
-                            Nome = "Neurologista"
+                            Descricao = "Especialidade médica que cuida do coração",
+                            Nome = "Cardiologia"
                         },
                         new
                         {
                             Id = 2,
-                            Descricao = "Especialista médica que trata doenças relacionadas ao cérebro e ao sistema nervoso",
-                            Nome = "Neurologista"
+                            Descricao = "Especialidade que trata de doenças e condições da pele.",
+                            Nome = "Dermatologia"
                         },
                         new
                         {
                             Id = 3,
-                            Descricao = "Especialista médica que trata problemas de pele, cabelos e unhas",
-                            Nome = "Dermatologista"
+                            Descricao = "Especialidade focada no tratamento de ossos, músculos .",
+                            Nome = "Ortopedia"
                         },
                         new
                         {
                             Id = 4,
-                            Descricao = "Especialista médica que diagnostica e trata problemas hormonais e do sistema endócrino",
-                            Nome = "Endocrinologista"
+                            Descricao = "Área médica voltada ao cuidado da saúde infantil.",
+                            Nome = "Pediatria"
                         },
                         new
                         {
                             Id = 5,
-                            Descricao = "Especialista médica que trata doenças relacionadas aos rins e ao sistema urinário",
-                            Nome = "Nefrologista"
+                            Descricao = "Especialidade que trata da saúde do sistema reprodutor feminino.",
+                            Nome = "Ginecologia"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Descricao = "Área da medicina que trata do sistema nervoso.",
+                            Nome = "Neurologia"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Descricao = "Especialidade que cuida da saúde mental e transtornos psicológicos.",
+                            Nome = "Psiquiatria"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Descricao = "Especialidade dedicada ao cuidado da visão e dos olhos.",
+                            Nome = "Oftalmologia"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Descricao = "Especialidade que trata das glândulas e hormônios do corpo.",
+                            Nome = "Endocrinologia"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Descricao = "Área médica que cuida do sistema digestivo.",
+                            Nome = "Gastroenterologia"
                         });
                 });
 
@@ -352,7 +382,7 @@ namespace ProConsulta.Migrations
                         .IsRequired()
                         .HasColumnType("NVarchar(11)");
 
-                    b.Property<DateTime>("DataCastro")
+                    b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Documento")
@@ -426,15 +456,15 @@ namespace ProConsulta.Migrations
                         {
                             Id = "33f0ef9f-3d09-48ba-86d6-500a130e569c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd0e3b03-b98b-4bc7-87b0-1fb45f8d2764",
+                            ConcurrencyStamp = "499f77d6-4455-4ba0-b404-15808f2daa8e",
                             Email = "proconsulta@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PROCONSULTA@GMAIL.COM.BR",
                             NormalizedUserName = "PROCONSULTA@GMAIL.COM.BR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPcdtuwlG/vVK00EGzMj0ap/y3fRyLE0gDCbhL82iUAPrz1IREVmn8wsIHMYBZrfAw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHk97wOLPf/4thkpZGhrXuyLKT02NGO07cvbwgelhpFtGIMqCUp+rJCU6VNnec6X/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "113ea897-efb0-430b-a9ad-3b13e9af9efd",
+                            SecurityStamp = "aad38184-5af8-40b5-9d5e-03d9af3804f3",
                             TwoFactorEnabled = false,
                             UserName = "proconsulta@gmail.com.br",
                             Nome = "Pro Consulta"
