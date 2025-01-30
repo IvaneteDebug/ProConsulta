@@ -19,6 +19,8 @@ Este projeto é uma aplicação web desenvolvida com **Blazor** para **gerenciar
 
 ## Como Executar
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/usuario/Blazor-ProConsulta.git
+Faça um fork do projeto.
+Crie uma branch para sua feature: git checkout -b feature/minha-feature.
+Faça as alterações desejadas.
+Commit e push: git commit -am 'Adicionando nova feature' && git push origin feature/minha-feature.
+Abra um Pull Request para a branch main.
