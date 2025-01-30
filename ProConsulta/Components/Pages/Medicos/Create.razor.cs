@@ -11,19 +11,19 @@ namespace ProConsulta.Components.Pages.Medicos
     public class CreateMedicoPage : ComponentBase
     {
         [Inject]
-        private IMedicoRepository repository { get; set; } = null!;
+        private IEspecialidadeRepository EspecialidadeRepository { get; set; } = null!;
 
         [Inject]
-        private IEspecialidadeRepository especialidadeRepository { get; set; } = null!;
+        public IMedicoRepository repository { get; set; } = default!;
 
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
         [Inject]
-        public NavigationManager? Navigation { get; set; } = null!;
+        public NavigationManager Navigation { get; set; } = null!;
 
-        public List<Especialidade> Especialidades { get; set; } = new List<Especialidade>();
-        public MedicoInputModel InputModel { get; set; } = new MedicoInputModel();
+        public List<Especialidade> Especialidades { get; set; } = new();
+        public MedicoInputModel InputModel { get; set; } = new();
 
         public async Task OnValidSubmitAsync(EditContext editContext)
         {
@@ -38,22 +38,24 @@ namespace ProConsulta.Components.Pages.Medicos
                         Celular = model.Celular.SomenteCaracteres(),
                         CRM = model.CRM.SomenteCaracteres(),
                         EspecialidadeId = model.EspecialidadeId,
-                        DataCastro = model.DataCastro
+                        DataCadastro = model.DataCadastro
                     };
 
                     await repository.AddAsync(medico);
-                    Snackbar.Add("Medico cadastrado com sucesso", Severity.Success);
-                    Navigation!.NavigateTo("/medicos");
-                };
+                    Snackbar.Add("Médico cadastrado com sucesso!", Severity.Success);
+                    Navigation.NavigateTo("/medicos");
+                }
             }
             catch (Exception ex)
             {
                 Snackbar.Add(ex.Message, Severity.Error);
             }
         }
+
         protected override async Task OnInitializedAsync()
         {
-            Especialidades = await especialidadeRepository.GetAllAsync();
+            Especialidades = await EspecialidadeRepository.GetAllAsync();
         }
+
     }
 }

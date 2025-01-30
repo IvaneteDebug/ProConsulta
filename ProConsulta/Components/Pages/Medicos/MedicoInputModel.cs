@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProConsulta.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProConsulta.Components.Pages.Medicos
 {
@@ -6,7 +7,7 @@ namespace ProConsulta.Components.Pages.Medicos
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = " {0} deve ser fornecido")]
+        [Required(ErrorMessage = "{0} deve ser fornecido")]
         [MaxLength(50, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
         public string Nome { get; set; } = null!;
 
@@ -16,13 +17,13 @@ namespace ProConsulta.Components.Pages.Medicos
         [Required(ErrorMessage = "{0} deve ser fornecido")]
         public string CRM { get; set; } = null!;
 
-        public DateTime DataCastro { get; set; } = DateTime.Now;
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "{0} deve ser fornecido")]
         public string Celular { get; set; } = null!;
 
         [Required(ErrorMessage = "{0} deve ser fornecido")]
-        [RegularExpression("([1-9] [0-9]*)", ErrorMessage = "Valor selecionado é invalido")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Valor selecionado é inválido")]
         public int EspecialidadeId { get; set; }
     }
 }

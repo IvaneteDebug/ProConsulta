@@ -9,35 +9,35 @@ namespace ProConsulta.Components.Pages.Medicos
     public class IndexMedicoPage : ComponentBase
     {
         [Inject]
-        public IMedicoRepository repository { get; set; } = null!;
+        public IMedicoRepository Repository { get; set; } = null!;
 
         [Inject]
-        public IDialogService Dialog { get; set; } = null!;
+        public IDialogService DialogService { get; set; } = null!;
+
+        [Inject]
+        public NavigationManager Navigation { get; set; } = null!;
 
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
-        [Inject]
-        public NavigationManager? Navigation { get; set; } = null!;
-        public List<Medico> Medicos { get; set; } = new List<Medico>();
+        public List<Medico> Medicos { get; set; } = new();
+
         public async Task DeleteMedicoAsync(Medico medico)
         {
             try
             {
-                var result = await Dialog.ShowMessageBox
+                var result = await DialogService.ShowMessageBox
                 (
-                  "Atenção",
-                  $"Deseja excluir o médico {medico.Nome}?",
-                  yesText: "SIM",
-                  cancelText: "NÃO"
+                    "Atenção",
+                    $"Deseja excluir o médico {medico.Nome}?",
+                    yesText: "SIM",
+                    cancelText: "NÃO"
                 );
 
                 if (result is true)
                 {
-                    await repository.DeleteByIdAsync(medico.Id);
-
-                    Snackbar.Add("Médico excluido com sucesso!", Severity.Success);
-
+                    await Repository.DeleteByIdAsync(medico.Id);
+                    Snackbar.Add("Médico excluído com sucesso!", Severity.Success);
                     await OnInitializedAsync();
                 }
             }
@@ -46,12 +46,14 @@ namespace ProConsulta.Components.Pages.Medicos
                 Snackbar.Add(ex.Message, Severity.Error);
             }
         }
+
         public bool HideButtons { get; set; }
 
         [CascadingParameter]
         private Task<AuthenticationState>? AuthenticationState { get; set; }
+
         public void GoToUpdate(int id)
-            => Navigation!.NavigateTo($"/medicos/update/{id}");
+            => Navigation.NavigateTo($"/medicos/update/{id}");
 
         protected override async Task OnInitializedAsync()
         {
@@ -59,7 +61,7 @@ namespace ProConsulta.Components.Pages.Medicos
 
             HideButtons = !auth.User.IsInRole("Atendente");
 
-            Medicos = await repository.GetAllAsync();
+            Medicos = await Repository.GetAllAsync();
         }
     }
 }

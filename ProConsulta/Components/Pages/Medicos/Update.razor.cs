@@ -10,35 +10,34 @@ namespace ProConsulta.Components.Pages.Medicos
 {
     public class UpdateMedicoPage : ComponentBase
     {
-
         [Parameter]
         public int MedicoId { get; set; }
 
         [Inject]
-        private IMedicoRepository repository { get; set; } = null!;
+        private IEspecialidadeRepository EspecialidadeRepository { get; set; } = null!;
 
         [Inject]
-        private IEspecialidadeRepository especialidadeRepository { get; set; } = null!;
+        public IMedicoRepository repository { get; set; } = default!;
 
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
         [Inject]
-        public NavigationManager Navigation { get; set; } = null!;
+        public NavigationManager NavigationManager { get; set; } = null!;
 
         public Medico? CurrentMedico { get; set; }
-        public MedicoInputModel InputModel { get; set; } = new MedicoInputModel();
-        public List<Especialidade> Especialidades { get; set; } = new List<Especialidade>();
+        public MedicoInputModel InputModel { get; set; } = new();
+        public List<Especialidade> Especialidades { get; set; } = new();
 
         public async Task OnValidSubmitAsync(EditContext editContext)
         {
             try
             {
-                if (editContext is null) return;
+                if (CurrentMedico is null) return;
 
                 if (editContext.Model is MedicoInputModel model)
                 {
-                    CurrentMedico!.Id = model.Id;
+                    CurrentMedico.Id = MedicoId;
                     CurrentMedico.Nome = model.Nome;
                     CurrentMedico.Documento = model.Documento.SomenteCaracteres();
                     CurrentMedico.CRM = model.CRM.SomenteCaracteres();
@@ -46,8 +45,8 @@ namespace ProConsulta.Components.Pages.Medicos
                     CurrentMedico.EspecialidadeId = model.EspecialidadeId;
 
                     await repository.UpdateAsync(CurrentMedico);
-                    Snackbar.Add("Medico atualizado com sucesso", Severity.Success);
-                    Navigation.NavigateTo($"/medicos");
+                    Snackbar.Add("Médico atualizado com sucesso!", Severity.Success);
+                    NavigationManager.NavigateTo("/medicos");
                 }
             }
             catch (Exception ex)
@@ -55,20 +54,21 @@ namespace ProConsulta.Components.Pages.Medicos
                 Snackbar.Add(ex.Message, Severity.Error);
             }
         }
+
         protected override async Task OnInitializedAsync()
         {
             CurrentMedico = await repository.GetByIdAsync(MedicoId);
-            Especialidades = await especialidadeRepository.GetAllAsync();
+            Especialidades = await EspecialidadeRepository.GetAllAsync();
 
             if (CurrentMedico is null) return;
 
             InputModel = new MedicoInputModel
             {
                 Nome = CurrentMedico.Nome,
-                CRM = CurrentMedico.CRM,
                 Documento = CurrentMedico.Documento,
+                CRM = CurrentMedico.CRM,
                 Celular = CurrentMedico.Celular,
-                EspecialidadeId = CurrentMedico.EspecialidadeId,
+                EspecialidadeId = CurrentMedico.EspecialidadeId
             };
         }
     }
