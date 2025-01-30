@@ -6,7 +6,9 @@
         public string Nome { get; set; } = null!;
         public string Documento { get; set; } = null!;
         public string CRM { get; set; } = null!;
-        public DateTime DataCastro { get; set; }
+
+        public DateTime DataCadastro { get; set; }
+
         public string Celular { get; set; } = null!;
         public int EspecialidadeId { get; set; }
 

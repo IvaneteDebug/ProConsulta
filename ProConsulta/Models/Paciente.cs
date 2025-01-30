@@ -9,6 +9,7 @@
         public string Celular { get; set; } = null!;
         public DateTime DataNascimento { get; set; }
 
-        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+        public ICollection<Agendamento>? Agendamentos { get; set; } = new List<Agendamento>();
     }
 }
+
