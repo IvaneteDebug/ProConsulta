@@ -2,36 +2,40 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using ProConsulta.Aplication;
 using ProConsulta.Components;
 using ProConsulta.Components.Account;
 using ProConsulta.Data;
+using ProConsulta.Repositories.Agendamentos;
+using ProConsulta.Repositories.Especialidades;
+using ProConsulta.Repositories.Medicos;
+using ProConsulta.Repositories.Pacientes;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add MudBlazor services
-builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services
-       .AddAplication();
+builder.Services.AddMudServices();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+
 builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = IdentityConstants.ApplicationScheme;
-        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-    })
+{
+    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+})
     .AddIdentityCookies();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("ProConsulta") ?? throw new InvalidOperationException("Connection string 'ProConsulta' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
