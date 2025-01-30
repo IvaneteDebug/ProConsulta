@@ -11,14 +11,18 @@ namespace ProConsulta.Components.Pages.Pacientes
     {
         [Inject]
         public IPacienteRepository repository { get; set; } = null!;
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } = null!;
+
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
-        [Inject]
-        public NavigationManager? NavigationManager { get; set; }
-        public PacienteInputModel InputModel { get; set; } = new PacienteInputModel();
+        public PacienteInputModel InputModel { get; set; } = new();
 
         public DateTime? DataNascimento { get; set; } = DateTime.Today;
+
+        public DateTime? MaxDate { get; set; } = DateTime.Today;
 
         public async Task OnValidSubmitAsync(EditContext editContext)
         {
@@ -32,7 +36,7 @@ namespace ProConsulta.Components.Pages.Pacientes
                         Documento = model.Documento.SomenteCaracteres(),
                         Celular = model.Celular.SomenteCaracteres(),
                         Email = model.Email,
-                        DataNascimento = model.DataNascimento
+                        DataNascimento = DataNascimento.Value
                     };
 
                     await repository.AddAsync(paciente);

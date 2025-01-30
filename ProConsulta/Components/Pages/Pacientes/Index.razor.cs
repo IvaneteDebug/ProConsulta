@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using ProConsulta.Models;
 using ProConsulta.Repositories.Pacientes;
 
 namespace ProConsulta.Components.Pages.Pacientes
 {
-    public class IndexPage : ComponentBase
+    public class IndexPacientePage : ComponentBase
     {
         [Inject]
         public IPacienteRepository repository { get; set; } = null!;
@@ -17,10 +18,15 @@ namespace ProConsulta.Components.Pages.Pacientes
         public ISnackbar Snackbar { get; set; } = null!;
 
         [Inject]
-        public NavigationManager? NavigationManager { get; set; }
+        public NavigationManager NavigationManager { get; set; } = null!;
 
-        [Inject]
         public List<Paciente> Pacientes { get; set; } = new List<Paciente>();
+
+        [CascadingParameter]
+        private Task<AuthenticationState> AuthenticationState { get; set; }
+
+        public bool HideButtons { get; set; }
+
         public async Task DeletePaciente(Paciente paciente)
         {
             try
@@ -37,7 +43,6 @@ namespace ProConsulta.Components.Pages.Pacientes
                 {
                     await repository.DeleteByIdAsync(paciente.Id);
                     Snackbar.Add($"Paciente {paciente.Nome} excluído com sucesso!", Severity.Success);
-
                     await OnInitializedAsync();
                 }
             }
@@ -46,12 +51,18 @@ namespace ProConsulta.Components.Pages.Pacientes
                 Snackbar.Add(ex.Message, Severity.Error);
             }
         }
+
         public void GoToUpdate(int id)
         {
-            NavigationManager!.NavigateTo("/pacientes/update/{id}");
+            NavigationManager.NavigateTo($"/pacientes/update/{id}");
         }
+
         protected override async Task OnInitializedAsync()
         {
+            var auth = await AuthenticationState;
+
+            HideButtons = !auth.User.IsInRole("Atendente");
+
             Pacientes = await repository.GetAllAsync();
         }
     }
